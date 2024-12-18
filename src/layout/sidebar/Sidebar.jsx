@@ -111,11 +111,7 @@ export function Sidebar() {
         {!isCollapsed ? (
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full overflow-hidden">
-              <img 
-                src="/placeholder.svg" 
-                alt="User avatar"
-                className="w-full h-full object-cover"
-              />
+              avatar
             </div>
             <div>
               <p className="font-medium">shadcn</p>
