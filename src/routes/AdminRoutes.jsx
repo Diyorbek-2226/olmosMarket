@@ -1,13 +1,23 @@
 import { Route, Routes } from 'react-router-dom';
-import AdminLayout from '../layout/AdminLayout';
 import { routes } from './routes';
-import Dashboard from '../pages/dashboard/Dashboard';
+import Login from '../pages/login/Login';
+import { ProtectedRoute } from '../components/protectedRoute/ProtectedRoute';
+import AdminLayout from '../layout/adminLayout/AdminLayout';
+import SellerAdd from '../pages/sellerAdd/SellerAdd';
+import Logout from '../components/logOut/LogOut';
 
 export default function AdminRoutes() {
   return (
     <Routes>
-      <Route path='/admin' element={<AdminLayout />}>
-        <Route index element={<Dashboard></Dashboard>}/>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="admin"
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
         {routes.map((item) => (
           <Route
             key={item.id}
@@ -15,6 +25,8 @@ export default function AdminRoutes() {
             element={<item.element />}
           />
         ))}
+        <Route path='sellers/add' element={<SellerAdd/>}/>
+        <Route path='logout' element={<Logout/>}/>
       </Route>
     </Routes>
   );

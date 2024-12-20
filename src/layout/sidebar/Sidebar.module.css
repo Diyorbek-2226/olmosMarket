@@ -1,0 +1,115 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.collapsed {
+  width: 60px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.brandName {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.highlight {
+  color: #3b82f6;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.toggleButton:hover {
+  background-color: #e9ecef;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+.nav {
+  flex-grow: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  gap: 0.75rem;
+}
+
+.navLink:hover {
+  background-color: #e9ecef;
+}
+
+.active {
+  background-color: #e9ecef;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoutLink {
+  color: #495057;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.logoutLink:hover {
+  color: #3b82f6;
+}
+

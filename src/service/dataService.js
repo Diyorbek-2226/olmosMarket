@@ -1,7 +1,7 @@
 import axios from "axios";
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const getAccessToken = () => localStorage.getItem("access_token");
+const getAccessToken = () => localStorage.getItem("token");
 const getRefreshToken = () => localStorage.getItem("refresh_token");
 
 export const api = axios.create({
@@ -66,7 +66,7 @@ api.interceptors.response.use(
         const { access_token } = response.data;
 
         // Yangi access tokenni saqlash
-        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("token", access_token);
 
         api.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
         processQueue(null, access_token);
