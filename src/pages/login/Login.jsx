@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../service/api/auth';
 
 function Login() {
   const navigate = useNavigate();
@@ -19,57 +20,20 @@ function Login() {
       return;
     }
 
-    try {
-      setLoading(true);
-      setError('');
 
-      const response = await fetch('http://157.230.94.49:8088/api/v1/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
+    login({username:username, password:password}).then(res =>{
+      if (res.status === 200) {
+        console.log(res);
+        localStorage.setItem("token" , res.data.token);
+        localStorage.setItem("refresh_token",res.data.refreshToken);
+        localStorage.setItem("role", res.data.roles[0]);
+        navigate("/admin/dashboard")
+      }    
+    }).catch(err =>{
+      alert("Nimadir xato: "+ err.message)
+    })
 
-      const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Login xatosi");
-      }
-
-      // Save tokens and user data
-      localStorage.setItem('accessToken', data.token);
-      localStorage.setItem('refreshToken', data.refreshToken);
-      
-      const userData = {
-        id: data.userId,
-        username: data.username,
-        roles: data.roles,
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
-
-      // Set Authorization header for future requests
-      if (data.token) {
-        localStorage.setItem('token', `Bearer ${data.token}`);
-      }
-
-      // Navigate based on role
-      if (data.roles.includes('ROLE_ADMIN')) {
-        navigate('/admin/dashboard');
-      } else if (data.roles.includes('ROLE_SELLER')) {
-        navigate('/seller/dashboard');
-      } else {
-        navigate('/dashboard');
-      }
-
-    } catch (err) {
-      setError(err.message || "Login paytida xatolik yuz berdi");
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (

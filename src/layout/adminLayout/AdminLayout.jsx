@@ -1,17 +1,27 @@
-import { Outlet } from 'react-router-dom'
-import { Sidebar } from '../sidebar/Sidebar'
+import { Outlet } from 'react-router-dom';
+import styles from './AdminLayout.module.css';
+import { Sidebar } from '../sidebar/Sidebar';
+import Navbar from '../../components/navbar/Navbar';
 
-export default function AdminLayout() {
+function AdminLayout() {
   return (
-    <div className="flex h-screen bg-background">
+    <div className={styles.layout}>
+      {/* Sidebar */}
       <Sidebar />
-      <main className="flex-1 overflow-auto">
-        <div className="p-6">
-          <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
-          <Outlet />
-        </div>
-      </main>
+
+      {/* Main Content */}
+      <div className={styles.mainContainer}>
+        <Navbar/>
+
+        {/* Page Content */}
+        <main className={styles.main}>
+          <div className={styles.content}>
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
-  )
+  );
 }
 
+export default AdminLayout;
