@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ChevronRight, User } from 'lucide-react';
+import { LayoutDashboard, ChevronRight, User } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { routes } from '../../routes/routes';
-import logo from '../../assets/logo.svg';
+import icons from '../../assets/logo.svg'
 
 export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -13,23 +13,23 @@ export function Sidebar() {
     setMenuItems(routes);
   }, []);
 
+  
   return (
-    <div className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
+    <div className={`${styles.sidebar} ${isCollapsed ? styles.sidebarCollapsed : ''}`}>
       <div className={styles.header}>
         {!isCollapsed && (
           <div className={styles.logo}>
-            <img src={logo} alt="Logo" className={styles.logoIcon} />
-            <span className={styles.brandName}>
-              OLMOS <span className={styles.highlight}>MARKET</span>
-            </span>
+            <div className={styles.logoIcon}>
+             <img src={icons} alt="" />
+            </div>
+            <span className='font-mono font-bold'>OLMOS <h1 className='text-blue-600 inline'>MARKET </h1></span>
           </div>
         )}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className={styles.toggleButton}
-          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          <ChevronRight size={20} className={isCollapsed ? styles.rotate180 : ''} />
+          <ChevronRight size={16} className={isCollapsed ? styles.rotate180 : ''} />
         </button>
       </div>
 
@@ -39,10 +39,10 @@ export function Sidebar() {
             key={item.id}
             to={item.path}
             className={({ isActive }) =>
-              `${styles.navLink} ${isActive ? styles.active : ''}`
+              `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
             }
           >
-            {item.icon && <item.icon size={20} />}
+            {item.icon && <item.icon size={16} />}
             {!isCollapsed && <span>{item.name}</span>}
           </NavLink>
         ))}
@@ -53,10 +53,9 @@ export function Sidebar() {
           <User size={24} />
         </div>
         {!isCollapsed && (
-          <NavLink to="/logout" className={styles.logoutLink}>Logout</NavLink>
+         <NavLink to={'logout'}>logout</NavLink>
         )}
       </div>
     </div>
   );
 }
-
