@@ -13,23 +13,24 @@ export function Sidebar() {
     setMenuItems(routes);
   }, []);
 
-  
   return (
     <div className={`${styles.sidebar} ${isCollapsed ? styles.sidebarCollapsed : ''}`}>
       <div className={styles.header}>
         {!isCollapsed && (
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-             <img src={icons} alt="" />
+             <img src={icons} alt="Olmos Market" />
             </div>
-            <span className='font-mono font-bold'>OLMOS <h1 className='text-blue-600 inline'>MARKET </h1></span>
+            <span className={styles.logoText}>
+              OLMOS <span className={styles.highlight}>MARKET</span>
+            </span>
           </div>
         )}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className={styles.toggleButton}
         >
-          <ChevronRight size={16} className={isCollapsed ? styles.rotate180 : ''} />
+          <ChevronRight size={20} className={isCollapsed ? styles.rotate180 : ''} />
         </button>
       </div>
 
@@ -42,7 +43,7 @@ export function Sidebar() {
               `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
             }
           >
-            {item.icon && <item.icon size={16} />}
+            {item.icon && <item.icon size={20} />}
             {!isCollapsed && <span>{item.name}</span>}
           </NavLink>
         ))}
@@ -53,9 +54,10 @@ export function Sidebar() {
           <User size={24} />
         </div>
         {!isCollapsed && (
-         <NavLink to={'logout'}>logout</NavLink>
+         <NavLink to={'logout'}>Logout</NavLink>
         )}
       </div>
     </div>
   );
 }
+

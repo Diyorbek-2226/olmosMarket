@@ -3,55 +3,57 @@
   flex-direction: column;
   width: 250px;
   height: 100vh;
-  background-color: #f8f9fa;
-  transition: width 0.3s ease;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.collapsed {
-  width: 60px;
+.sidebarCollapsed {
+  width: 70px;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #313244;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .logoIcon {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
+  background-color: #89b4fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.brandName {
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.highlight {
-  color: #3b82f6;
+.logoIcon img {
+  width: 24px;
+  height: 24px;
 }
 
 .toggleButton {
   background: none;
   border: none;
+  color: #cdd6f4;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .toggleButton:hover {
-  background-color: #e9ecef;
+  background-color: #313244;
 }
 
 .rotate180 {
@@ -68,48 +70,60 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  color: #495057;
+  color: #cdd6f4;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 0.25rem 0.5rem;
   gap: 0.75rem;
 }
 
 .navLink:hover {
-  background-color: #e9ecef;
+  background-color: #313244;
 }
 
-.active {
-  background-color: #e9ecef;
-  font-weight: bold;
-  color: #3b82f6;
+.navLinkActive {
+  background-color: #313244;
+  color: #89b4fa;
+}
+
+.navLink svg {
+  transition: transform 0.2s ease;
+}
+
+.navLink:hover svg {
+  transform: scale(1.1);
 }
 
 .userProfile {
   display: flex;
   align-items: center;
   padding: 1rem;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid #313244;
   gap: 0.75rem;
 }
 
 .avatar {
   width: 40px;
   height: 40px;
-  background-color: #e9ecef;
+  background-color: #313244;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logoutLink {
-  color: #495057;
+.avatar svg {
+  color: #89b4fa;
+}
+
+.userProfile a {
+  color: #cdd6f4;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s ease;
 }
 
-.logoutLink:hover {
-  color: #3b82f6;
+.userProfile a:hover {
+  color: #89b4fa;
 }
-

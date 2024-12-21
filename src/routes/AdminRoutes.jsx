@@ -5,6 +5,7 @@ import { ProtectedRoute } from '../components/protectedRoute/ProtectedRoute';
 import AdminLayout from '../layout/adminLayout/AdminLayout';
 import SellerAdd from '../pages/sellerAdd/SellerAdd';
 import Logout from '../components/logOut/LogOut';
+import SellerUpdate from '../pages/sellerUpdate/SellerUpdate';
 
 export default function AdminRoutes() {
   return (
@@ -26,6 +27,7 @@ export default function AdminRoutes() {
           />
         ))}
         <Route path='sellers/add' element={<SellerAdd/>}/>
+        <Route path="/admin/sellers/:id"element={<SellerUpdate/>}/>
         <Route path='logout' element={<Logout/>}/>
       </Route>
     </Routes>
