@@ -3,9 +3,8 @@ import { routes } from './routes';
 import Login from '../pages/login/Login';
 import { ProtectedRoute } from '../components/protectedRoute/ProtectedRoute';
 import AdminLayout from '../layout/adminLayout/AdminLayout';
-import SellerAdd from '../pages/sellerAdd/SellerAdd';
 import Logout from '../components/logOut/LogOut';
-import SellerUpdate from '../pages/sellerUpdate/SellerUpdate';
+import SellerForm from '../pages/seller/components/SellerForm';
 
 export default function AdminRoutes() {
   return (
@@ -26,9 +25,11 @@ export default function AdminRoutes() {
             element={<item.element />}
           />
         ))}
-        <Route path='sellers/add' element={<SellerAdd/>}/>
-        <Route path="/admin/sellers/:id"element={<SellerUpdate/>}/>
+        <Route path='sellers/add' element={<SellerForm/>}/>
+        <Route path="/admin/sellers/edit/:id"element={<SellerForm/>}/>
+        <Route path="/admin/sellers/view/:id"element={<SellerForm/>}/>
         <Route path='logout' element={<Logout/>}/>
+        <Route path='*' element={<div>NOT FOUND</div>}></Route>
       </Route>
     </Routes>
   );

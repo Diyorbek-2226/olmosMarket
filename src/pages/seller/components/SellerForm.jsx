@@ -1,11 +1,32 @@
-import React, { useRef, useState } from 'react';
-import { registerSeller } from "../../service/api/seller";
+import React, { useEffect, useRef, useState } from 'react';
+import { registerSeller, sellerGetId } from '../../../service/api/seller';
+import { useLocation, useParams } from 'react-router-dom';
 
-export default function SellerAdd() {
+export default function SellerForm() {
     const fullNameRef = useRef();
     const usernameRef = useRef();
     const passwordRef = useRef();
     const shopNameRef = useRef();
+    const pathname = useLocation();
+    const [path , setPath] = useState("");
+    const [seller , setSeller] = useState({});
+    const {id} = useParams();
+
+    useEffect(() => {
+        const parts = pathname.pathname.split("/");
+        const viewPart = parts[3];
+        setPath(viewPart);
+    }, [pathname]);
+    
+    useEffect(() => {
+        if (path !== 'add') { 
+            sellerGetId(id).then(res => {
+                setSeller(res.data);
+            }).catch(err => {
+                console.error("Error fetching seller:", err);
+            });
+        }
+    }, [path, id]);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -37,6 +58,7 @@ export default function SellerAdd() {
         }
     };
 
+    
     return (
         <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
             <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -46,9 +68,17 @@ export default function SellerAdd() {
                         <form className="divide-y divide-gray-200" onSubmit={handleSubmit}>
                             <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                 <div className="flex flex-col">
-                                    <label className="leading-loose">To'liq ism</label>
-                                    <input type="text" ref={fullNameRef} className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="To'liq ismingizni kiriting" required />
-                                </div>
+                                    <label className="leading-loose">Toliq ism</label>
+  <input 
+  type="text" 
+  defaultValue={seller.fullname || ''} 
+  ref={fullNameRef} 
+  readOnly={path === 'view'} 
+  className={`...`} 
+  placeholder="To'liq ismingizni kiriting" 
+  required 
+/>
+</div>
                                 <div className="flex flex-col">
                                     <label className="leading-loose">Foydalanuvchi nomi</label>
                                     <input type="text" ref={usernameRef} className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Foydalanuvchi nomini kiriting" required />
@@ -58,7 +88,7 @@ export default function SellerAdd() {
                                     <input type="password" ref={passwordRef} className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Parolni kiriting" required />
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="leading-loose">Do'kon nomi</label>
+                                    <label className="leading-loose">Dokon nomi</label>
                                     <input type="text" ref={shopNameRef} className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Do'kon nomini kiriting" required />
                                 </div>
                             </div>
