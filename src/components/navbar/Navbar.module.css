@@ -1,49 +1,42 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 64px;
+  min-height: 64px;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1e1e2e;
+}
+
+.menuButton:hover {
+  color: #89b4fa;
+}
+
+.icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  color: #1e1e2e;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #89b4fa;
+}
+
+@media (min-width: 768px) {
   .menuButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
+    display: none;
   }
-  
-  .iconContainer {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon {
-    margin-left: 0.75rem;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.2s ease;
-  }
-  
-  .icon:hover {
-    color: #3b82f6;
-  }
-  
-  @media (min-width: 640px) {
-    .header {
-      padding: 1rem;
-    }
-  
-    .icon {
-      margin-left: 1rem;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .menuButton {
-      display: none;
-    }
-  }
-  
-  
+}
+

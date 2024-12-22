@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, Edit, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { deleteSeller, getAll } from '../../service/api/seller';
+import BackLink from '../../components/backLink/BackLink';
 export default function Seller() {
   const [sellers, setSellers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,9 +16,8 @@ export default function Seller() {
       setSellers(res.data);
     } catch (error) {
       toast.error(error);
-    } finally {
+    } 
       setIsLoading(false); 
-    }
   }
   useEffect(()=>{
 FetchAll()
@@ -35,7 +35,17 @@ useEffect((id)=>{
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="container mx-auto py-10 px-4">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Sotuvchilar haqida malumot</h1>
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+  <p className="text-lg sm:text-xl font-bold text-indigo-800">
+    Sotuvchilar haqida malumot
+  </p>
+  <BackLink
+    title="Sotuvchini qoshish "
+    to="/admin/sellers/add"
+    className="text-sm sm:text-base px-4 py-2 bg-indigo-800 text-white rounded-md hover:bg-indigo-700 transition duration-300"
+  />
+</div>
+
       <div className="bg-indigo-50 rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-indigo-200">

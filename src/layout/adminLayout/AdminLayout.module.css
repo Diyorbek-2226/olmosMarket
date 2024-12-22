@@ -1,48 +1,36 @@
 .layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f8f9fa;
+  overflow: hidden;
 }
 
 .mainContainer {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
   width: 100%;
+  transition: margin-left 0.3s ease;
+  overflow: hidden;
 }
 
 .main {
-  padding: 0.5rem;
-  flex-grow: 1;
+  flex: 1;
+  padding: 1.5rem;
   background-color: #fafafa;
   overflow-y: auto;
+  height: calc(100vh - 64px); /* Subtract navbar height */
 }
 
-.content {
-  max-width: 1200px;
-  margin: auto;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-@media (min-width: 640px) {
-  .main {
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: 20px;
+@media (max-width: 767px) {
+  .sidebarOpen {
+    margin-left: 250px; /* Adjust this value to match your sidebar width */
   }
 }
 
 @media (min-width: 768px) {
-  .title {
-    font-size: 24px;
-    margin-bottom: 16px;
+  .mainContainer {
+    margin-left: 250px; /* Adjust this value to match your sidebar width */
   }
 }
 
