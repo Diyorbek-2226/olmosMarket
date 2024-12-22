@@ -1,63 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, ChevronRight, User } from 'lucide-react';
+import { User, X } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { routes } from '../../routes/routes';
-import icons from '../../assets/logo.svg'
+import icons from '../../assets/logo.svg';
 
-export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [menuItems, setMenuItems] = useState([]);
-
-  useEffect(() => {
-    setMenuItems(routes);
-  }, []);
-
+export function Sidebar({ isOpen, onClose }) {
   return (
-    <div className={`${styles.sidebar} ${isCollapsed ? styles.sidebarCollapsed : ''}`}>
-      <div className={styles.header}>
-        {!isCollapsed && (
+    <>
+      <div className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
+        <div className={styles.header}>
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-             <img src={icons} alt="Olmos Market" />
+              <img src={icons} alt="Olmos Market" />
             </div>
             <span className={styles.logoText}>
               OLMOS <span className={styles.highlight}>MARKET</span>
             </span>
           </div>
-        )}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className={styles.toggleButton}
-        >
-          <ChevronRight size={20} className={isCollapsed ? styles.rotate180 : ''} />
-        </button>
-      </div>
-
-      <nav className={styles.nav}>
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.id}
-            to={item.path}
-            className={({ isActive }) =>
-              `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-            }
-          >
-            {item.icon && <item.icon size={20} />}
-            {!isCollapsed && <span>{item.name}</span>}
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className={styles.userProfile}>
-        <div className={styles.avatar}>
-          <User size={24} />
+          <button onClick={onClose} className={styles.closeButton}>
+            <X size={24} />
+          </button>
         </div>
-        {!isCollapsed && (
-         <NavLink to={'logout'}>Logout</NavLink>
-        )}
+
+        <nav className={styles.nav}>
+          {routes.map((item) => (
+            <NavLink
+              key={item.id}
+              to={item.path}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
+              }
+              onClick={onClose}
+            >
+              {item.icon && <item.icon size={20} />}
+              <span>{item.name}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className={styles.userProfile}>
+          <div className={styles.avatar}>
+            <User size={24} />
+          </div>
+          <NavLink to={'logout'} onClick={onClose}>Logout</NavLink>
+        </div>
       </div>
-    </div>
+      {isOpen && <div className={styles.backdrop} onClick={onClose}></div>}
+    </>
   );
 }
 

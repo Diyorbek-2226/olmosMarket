@@ -1,11 +1,15 @@
-import { HelpCircle, Bell, User } from 'lucide-react';
+import { HelpCircle, Bell, User, Menu } from 'lucide-react';
 
-function Navbar() {
+// Fix: Correctly destructure the onToggleSidebar prop from the props object
+function Navbar({ onToggleSidebar }) {
   return (
-    <header className="flex justify-between  items-center p-4 bg-white shadow-md">
-      <div className="text-lg font-semibold text-gray-800">
-        <span className="text-2xl font-mono font-bold">Admin uchun</span>
-      </div>
+    <header className="flex items-center p-4 bg-white shadow-md justify-between">
+      <button 
+        onClick={onToggleSidebar} 
+        className="text-gray-800 hover:text-blue-500 cursor-pointer"
+      >
+        <Menu size={24} />
+      </button>
       <div className="flex items-center">
         <HelpCircle className="ml-5 text-gray-800 hover:text-blue-500 cursor-pointer" size={24} />
         <Bell className="ml-5 text-gray-800 hover:text-blue-500 cursor-pointer" size={24} />

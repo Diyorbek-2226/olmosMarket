@@ -1,23 +1,25 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from './AdminLayout.module.css';
 import { Sidebar } from '../sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
+import styles from './AdminLayout.module.css';
 
 function AdminLayout() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className={styles.layout}>
-      {/* Sidebar */}
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-      {/* Main Content */}
       <div className={styles.mainContainer}>
-        <Navbar/>
+        <Navbar onToggleSidebar={toggleSidebar} />
 
-        {/* Page Content */}
         <main className={styles.main}>
-          <div className={styles.content}>
-            <Outlet />
-          </div>
+          <Outlet />
         </main>
       </div>
     </div>
@@ -25,3 +27,4 @@ function AdminLayout() {
 }
 
 export default AdminLayout;
+
